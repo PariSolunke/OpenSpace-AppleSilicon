@@ -1,55 +1,77 @@
+
 ![OpenSpace Logo](/data/openspace-horiz-logo-crop.png)
-[OpenSpace](http://openspaceproject.com) is an open source, non-commercial, and freely available interactive data visualization software designed to visualize the entire known universe and portray our ongoing efforts to investigate the cosmos.  Bringing the latest techniques from data visualization research to the general public, OpenSpace supports interactive presentation of dynamic data from observations, simulations, and space mission planning and operations.  The software works on multiple operating systems (Windows, Linux, MacOS) with an extensible architecture capable of powering both personal computers and also high resolution tiled displays and planetarium domes.  In addition, OpenSpace enables simultaneous connections across the globe creating opportunity for shared experiences among audiences worldwide.  The target audience of the software reaches from the general public who wishes to explore our universe, enthusiasts interested in hacking the underlying components in OpenSpace to create unique experiences, informal science institutions wishing to create a low-cost, yet powerful exhibition piece, but also scientists desiring to visualize their datasets in a contextualized, powerful software.
+[OpenSpace](http://openspaceproject.com) is an open source, non-commercial, and freely available interactive data visualization software designed to visualize the entire known universe and portray our ongoing efforts to investigate the cosmos.  
 
+This is a fork of the feature/applesilicon branch of OpenSpace, with additional modifications to the shaders in the GlobeBrowsing module to ensure compatibility with Mac computers running Apple Silicon. To read more about the project please or see [here](https://github.com/OpenSpace/OpenSpace) 
 [![License](https://img.shields.io/badge/License-MIT-purple.svg?style=flat-square)](LICENSE)
-[![Download](https://img.shields.io/github/v/tag/OpenSpace/OpenSpace?label=Version&color=maroon&style=flat-square)](https://www.openspaceproject.com/installation)
-![Size](https://img.shields.io/github/repo-size/OpenSpace/OpenSpace?style=flat-square&color=red)
 
-[![System Paper](https://img.shields.io/badge/System%20Paper-10.1109%2FTVCG.2019.2934259-blue?style=flat-square)](https://doi.org/10.1109/TVCG.2019.2934259)
-[![GlobeBrowsing Paper](https://img.shields.io/badge/GlobeBrowsing%20Paper-https%3A%2F%2Fdoi.org%2F10.1109%2FTVCG.2017.2743958-blue?style=flat-square)](https://doi.org/10.1109/TVCG.2017.2743958)
+# Instructions
 
-![Contributors](https://img.shields.io/github/contributors/OpenSpace/OpenSpace?style=flat-square)
-![Commits](https://img.shields.io/github/commit-activity/m/OpenSpace/OpenSpace?color=green&style=flat-square)
+1) **CMake Best Practices:**
+   - Delete Build
+   - Clear Cache
 
-![Image](https://github.com/OpenSpace/openspace.github.io/raw/master/assets/images/collection.jpg)
+2) **Clone this repo**
 
-# Background
-OpenSpace started as a collaboration between Sweden's [Linköping University](https://scivis.github.io) (LiU) and the [American Museum of Natural History](https://www.amnh.org) (AMNH).  Development of the software began several years ago through a close collaboration with NASA Goddard's [Community Coordinated Modeling Center](https://ccmc.gsfc.nasa.gov) (CCMC) to model space weather forecasting and continued with visualizations of NASA's New Horizons mission to Pluto and ESA's Rosetta mission to 67P/Churyumov-Gerasimenko.  This promising set of preliminary work provided a foundation for continued funding from NASA, the Swedish eScience Research Centre, and the Knut and Alice Wallenberg foundation, which has extended the collaboration to include the University of Utah's [Scientific Computing and Imaging](https://www.sci.utah.edu) (SCI) Institute, [New York University](https://www.nyu.edu)'s Tandon School of Engineering, multiple informal science institutions across the world, and multiple, international vendors.
+3) **Install the dependencies listed in the macOS compilation instructions [here](https://docs.openspaceproject.com/en/latest/contribute/development/compiling/macos.html)**  
+   Use the standard `brew` commands from the wiki.
 
-![Image](https://github.com/OpenSpace/openspace.github.io/raw/master/assets/images/presentation.jpg)
+4) **For Apple Silicon, you may need to update `apache-arrow`**  
+   - Check if your GDAL install is not `3.8.3_2`
+   - If it isn't, run:  
+     ```bash
+     brew upgrade apache-arrow
+     ```  
+     This will update a bunch of dependencies including GDAL from `3.7 -> 3.8`.
 
-# Features
-Some of the high-level features supported in OpenSpace are:
- - AMNH's Digital Universe catalog of extrasolar datasets (stars, galaxies, quasars, ...)
- - High-resolution planetary images for major objects in the solar system (Earth, Moon, Mars, Venus, ...)
- - Animated 3D models representing space missions (ISS, New Horizons, JWST, ...)
- - Support for custom profiles with arbitrary user-defined content
- - Ability to drive any type of display environment (flat screen, multi-projector, planetariums, ...)
- - Lua and JavaScript interface into the engine allowing highly customized controls
- - Native support to export an interactive sessions as individual frames for video export
- - much much more (see our [Changelog](http://wiki.openspaceproject.com/docs/general/releases))
+5) **CMake as normal**
+   - Ensure XCode is named **XCode** (and not XCode Beta or XCode 15, etc.)
+   - Ensure that XCode command line tools are installed:  
+     ```bash
+     xcode-select --install
+     ```
 
-OpenSpace requires at least support for [OpenGL](https://www.opengl.org/) version 3.3, some custom components require at least version 4.2.
+6) **CMake Configure**
 
-![Image](https://github.com/OpenSpace/openspace.github.io/raw/master/assets/images/display-systems.jpg)
+7) **CMake Generate**
 
-# Getting Started
-This repository contains the source code and example profiles for OpenSpace, but does not contain any data.  To build and install the application, please check out the [GitHub Wiki](https://github.com/OpenSpace/OpenSpace/wiki).  Here, you will find two pages, a [build instruction](https://github.com/OpenSpace/OpenSpace/wiki/Compiling) for all operating systems and then additional instructions for [Windows](https://github.com/OpenSpace/OpenSpace/wiki/Compiling-Windows), [Linux (Ubuntu)](https://github.com/OpenSpace/OpenSpace/wiki/Compiling-Ubuntu), and [MacOS](https://github.com/OpenSpace/OpenSpace/wiki/Compiling-MacOS). Please note that the Apple Silicon series of chips do not support OpenGL natively and Metal 2 does not support `double` precision accuracy (see [here](https://developer.apple.com/metal/Metal-Shading-Language-Specification.pdf) Section 2.1), therefore only the Intel processors for MacOS are supported and maintained.
+8) **Open XCode Project**
+   - Select the `OpenSpace` project file in the file browser on the top left.
+   - Select `Build Settings` and change the following settings for **EVERY SINGLE BUILD TARGET** (select all):
+     - Change **Architecture** to **Standard Architectures** (this may take some time)
+     - Change **Build Active Architecture Only** to **YES** (this may take some time)
+   - Select the **Assimp** target:
+     - Remove the `-Werror` flag on **Other C++ Flags** and **Other C Flags** (under Apple Clang - Custom Compiler flags) for all configurations (Debug, MinSizeRel, RelWithDebInfo, Release).
 
-Requirements for compiling are:
- - CMake version 3.25 or above
- - C++ compiler supporting C++20 (MSVC 19.31, GCC11, Clang14, AppleClang 13.1.6)
- - [Boost](http://www.boost.org/)
- - [Qt](http://www.qt.io/download)
+9) Ensure **'My Mac'** is selected in the top XCode toolbar.
 
-Feel free to create issues for missing features, bug reports, or compile problems or contact us via [email](mailto:openspace@amnh.org?subject=OpenSpace:).  Regarding any issues, you are very welcome on our [Slack support channel](https://openspacesupport.slack.com) to which you can freely [sign-up](https://join.slack.com/t/openspacesupport/shared_invite/zt-37niq6y9-T0JaCIk4UoFLI4VF5U9Vsw).
+10) Select the `OpenSpace` target, then click on **Edit Scheme** and set the build configuration to **Release**.
 
-![Image](https://github.com/OpenSpace/openspace.github.io/raw/master/assets/images/himalaya-nkpg-dome.jpg)
+11) **Build**
 
-# License
-The contents of this repository provided under an [MIT license](https://github.com/OpenSpace/OpenSpace/blob/master/LICENSE.md).
 
-# Support
-OpenSpace is supported by the following institutions:
+# Current Status and Issues
 
-![Image](https://github.com/OpenSpace/openspace.github.io/raw/master/assets/logos/sponsors.png)
+## Functionality Overview
+
+### What Works
+- **Globebrowsing Module**: This module works in full. The `applesilicon` profile successfully loads key elements such as:
+  - The digital universe
+  - The Earth and its default layers with fully functional textures
+  - The Moon, Sun, and Jupiter
+- **Default Profile**: Works well aside from the issues noted with the atmosphere module.
+
+### Partially Working Profiles
+- A few other profiles work with minor issues. More details will be elaborated.
+
+## Issues Encountered
+
+### Atmosphere Module
+- The shaders for this module do not function as expected. When enabled, intense flickering occurs around the planets, making for a jarring experience.
+
+### GUI (Graphical User Interface)
+- **Buggy Behavior**: The GUI sometimes fails to load properly. 
+  - A potential workaround is to close the application, clear the cache folder (located in the application root directory), and relaunch. However, this is not a guaranteed fix everytime, and may need multiple relaunches.
+  - In the event the main GUI fails to load, you can still access the older GUI by pressing `fn + F1`, which always works.
+
+---
