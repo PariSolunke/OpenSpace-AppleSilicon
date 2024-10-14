@@ -2,8 +2,7 @@
 ![OpenSpace Logo](/data/openspace-horiz-logo-crop.png)
 [OpenSpace](http://openspaceproject.com) is an open source, non-commercial, and freely available interactive data visualization software designed to visualize the entire known universe and portray our ongoing efforts to investigate the cosmos.  
 
-This is a fork of the feature/applesilicon branch of OpenSpace, with additional modifications to the shaders in the GlobeBrowsing module to ensure compatibility with Mac computers running Apple Silicon. To read more about the project please or see [here](https://github.com/OpenSpace/OpenSpace) 
-[![License](https://img.shields.io/badge/License-MIT-purple.svg?style=flat-square)](LICENSE)
+This is a fork of the feature/applesilicon branch of OpenSpace, with additional modifications to the shaders in the GlobeBrowsing module to ensure compatibility with Mac computers running Apple Silicon. To read more about the project please or see [here](https://github.com/OpenSpace/OpenSpace). This is the same version of the tool as the applesilicon branch, but I imagine it should be possible to integrate the shader chamnges here, and the changes from the applesilicon branch into the current version of the software.
 
 # Compilation Instructions
 
