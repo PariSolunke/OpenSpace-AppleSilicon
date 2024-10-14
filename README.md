@@ -5,7 +5,7 @@
 This is a fork of the feature/applesilicon branch of OpenSpace, with additional modifications to the shaders in the GlobeBrowsing module to ensure compatibility with Mac computers running Apple Silicon. To read more about the project please or see [here](https://github.com/OpenSpace/OpenSpace) 
 [![License](https://img.shields.io/badge/License-MIT-purple.svg?style=flat-square)](LICENSE)
 
-# Instructions
+# Compilation Instructions
 
 1) **CMake Best Practices:**
    - Delete Build
