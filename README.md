@@ -15,7 +15,9 @@ This is a fork of the feature/applesilicon branch of OpenSpace, with additional 
 3) **Install the dependencies listed in the macOS compilation instructions [here](https://docs.openspaceproject.com/en/latest/contribute/development/compiling/macos.html)**  
    Use the standard `brew` commands from the wiki.
 
-4) **For Apple Silicon, you may need to update `apache-arrow`**  
+4) **Install QT 6 from [here](https://doc.qt.io/qt-6/macos.html)** (tested with qt 6.5) 
+
+5) **For Apple Silicon, you may need to update `apache-arrow`**  
    - Check if your GDAL install is not `3.8.3_2`
    - If it isn't, run:  
      ```bash
@@ -23,18 +25,18 @@ This is a fork of the feature/applesilicon branch of OpenSpace, with additional 
      ```  
      This will update a bunch of dependencies including GDAL from `3.7 -> 3.8`.
 
-5) **CMake as normal**
+6) **CMake as normal**
    - Ensure XCode is named **XCode** (and not XCode Beta or XCode 15, etc.)
    - Ensure that XCode command line tools are installed:  
      ```bash
      xcode-select --install
      ```
 
-6) **CMake Configure**
+7) **CMake Configure**
 
-7) **CMake Generate**
+8) **CMake Generate**
 
-8) **Open XCode Project**
+9) **Open XCode Project**
    - Select the `OpenSpace` project file in the file browser on the top left.
    - Select `Build Settings` and change the following settings for **EVERY SINGLE BUILD TARGET** (select all):
      - Change **Architecture** to **Standard Architectures** (this may take some time)
@@ -42,11 +44,11 @@ This is a fork of the feature/applesilicon branch of OpenSpace, with additional 
    - Select the **Assimp** target:
      - Remove the `-Werror` flag on **Other C++ Flags** and **Other C Flags** (under Apple Clang - Custom Compiler flags) for all configurations (Debug, MinSizeRel, RelWithDebInfo, Release).
 
-9) Ensure **'My Mac'** is selected in the top XCode toolbar.
+10) Ensure **'My Mac'** is selected in the top XCode toolbar.
 
-10) Select the `OpenSpace` target, then click on **Edit Scheme** and set the build configuration to **Release**.
+11) Select the `OpenSpace` target, then click on **Edit Scheme** and set the build configuration to **Release**.
 
-11) **Build**
+12) **Build**
 
 
 # Current Status and Issues
