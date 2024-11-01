@@ -10,7 +10,7 @@ This is a fork of the feature/applesilicon branch of OpenSpace, with additional 
    - Delete Build
    - Clear Cache
 
-2) **Clone this repo**
+2) **Clone this repo** (use the recursive -r flag while cloning)
 
 3) **Install the dependencies listed in the macOS compilation instructions [here](https://docs.openspaceproject.com/en/latest/contribute/development/compiling/macos.html)**  
    Use the standard `brew` commands from the wiki.
