@@ -15,7 +15,7 @@ This is a fork of the feature/applesilicon branch of OpenSpace, with additional 
 3) **Install the dependencies listed in the macOS compilation instructions [here](https://docs.openspaceproject.com/en/latest/contribute/development/compiling/macos.html)**  
    Use the standard `brew` commands from the wiki.
 
-4) **Install QT 6 from [here](https://doc.qt.io/qt-6/macos.html](https://doc.qt.io/qt-6/get-and-install-qt.html)** (tested with qt 6.5) 
+4) **Install QT 6 from [here](https://doc.qt.io/qt-6/get-and-install-qt.html)** (tested with qt 6.5) 
 
 5) **For Apple Silicon, you may need to update `apache-arrow`**  
    - Check if your GDAL install is not `3.8.3_2`
