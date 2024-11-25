@@ -31,7 +31,8 @@ This is a fork of the feature/applesilicon branch of OpenSpace, with additional 
      ```bash
      xcode-select --install
      ```
-
+   - The generator used for building should be Xcode (not Unix Makefiles)
+     
 7) **CMake Configure**
 
 8) **CMake Generate**
