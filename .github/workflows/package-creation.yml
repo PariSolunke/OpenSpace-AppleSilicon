@@ -47,7 +47,8 @@ jobs:
       run: |
         openSpaceHome="$HOME/source/OpenSpace"
         cd "$openSpaceHome/build"
-        cmake -DCMAKE_BUILD_TYPE="Release" -DBUILD_TESTS=OFF -DOPENSPACE_HAVE_TESTS=OFF -DSGCT_BUILD_TESTS=OFF "$openSpaceHome"
+        # https://stackoverflow.com/questions/16700415/cmake-generate-xcode-project-from-existing-sources
+        cmake -G Xcode -DCMAKE_BUILD_TYPE="Release" -DBUILD_TESTS=OFF -DOPENSPACE_HAVE_TESTS=OFF -DSGCT_BUILD_TESTS=OFF "$openSpaceHome"
 
     - name: Build
       # Build your program with the given configuration
