@@ -36,7 +36,7 @@ jobs:
     - name: Install dependencies
       # https://docs.openspaceproject.com/releases-v0.20/contribute/development/compiling/ubuntu.html
       run: |
-        brew install glew boost freeimage mpv vulkan-headers vulkan-loader brotli gdal qt@6
+        brew install cmake glew boost freeimage mpv vulkan-headers vulkan-loader brotli gdal qt@6
 
     - name: Enable sccache
       uses: mozilla-actions/sccache-action@v0.0.7
@@ -48,7 +48,8 @@ jobs:
         openSpaceHome="$HOME/source/OpenSpace"
         cd "$openSpaceHome/build"
         # https://stackoverflow.com/questions/16700415/cmake-generate-xcode-project-from-existing-sources
-        cmake -G Xcode -DCMAKE_BUILD_TYPE="Release" -DBUILD_TESTS=OFF -DOPENSPACE_HAVE_TESTS=OFF -DSGCT_BUILD_TESTS=OFF "$openSpaceHome"
+        # CMAKE_PREFIX_PATH to /opt/homebrew - https://stackoverflow.com/questions/68105648/configure-cmake-to-work-with-homebrew-libraries-instead-system-provided-librarie
+        cmake -G Xcode -DCMAKE_BUILD_TYPE="Release" -DCMAKE_PREFIX_PATH=/opt/homebrew -DBUILD_TESTS=OFF -DCOMPILE_WARNING_AS_ERROR=OFF -DOPENSPACE_HAVE_TESTS=OFF -DSGCT_BUILD_TESTS=OFF "$openSpaceHome"
 
     - name: Build
       # Build your program with the given configuration
