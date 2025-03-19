@@ -36,7 +36,7 @@ jobs:
     - name: Install dependencies
       # https://docs.openspaceproject.com/releases-v0.20/contribute/development/compiling/ubuntu.html
       run: |
-        brew install cmake@2.8 glew boost freeimage mpv vulkan-headers vulkan-loader brotli gdal qt@6
+        brew install cmake@2 glew boost freeimage mpv vulkan-headers vulkan-loader brotli gdal qt@6
 
     - name: Enable sccache
       uses: mozilla-actions/sccache-action@v0.0.7
