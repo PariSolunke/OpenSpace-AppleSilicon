@@ -29,6 +29,7 @@ jobs:
         openSpaceHome="$HOME/source/OpenSpace"
         git clone --recursive https://github.com/PariSolunke/OpenSpace-AppleSilicon.git "$openSpaceHome"
         cd "$openSpaceHome"
+        patch -u modules/webbrowser/CMakeLists.txt webbrowsermodule.patch
         mkdir build
         cd build
         
