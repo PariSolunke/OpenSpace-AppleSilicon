@@ -7,11 +7,6 @@ env:
   # This yml is copied from https://github.com/hn-88/OpenSpace-AppImage/blob/main/.github/workflows/appimage-creation.yml
   # and modified.
   BUILD_TYPE: Release
-  # As recommended here: https://github.com/marketplace/actions/sccache-action
-  SCCACHE_GHA_ENABLED: "true"
-  SCCACHE_CACHE_SIZE: 5G
-  CMAKE_C_COMPILER_LAUNCHER: sccache
-  CMAKE_CXX_COMPILER_LAUNCHER: sccache
   
 jobs:
   build:
@@ -32,15 +27,11 @@ jobs:
         patch -u modules/webbrowser/CMakeLists.txt webbrowsermodule.patch
         mkdir build
         cd build
-        
-    
+            
     - name: Install dependencies
       # https://docs.openspaceproject.com/releases-v0.20/contribute/development/compiling/ubuntu.html
       run: |
         brew install cmake glew boost freeimage mpv vulkan-headers vulkan-loader brotli gdal qt@6
-
-    - name: Enable sccache
-      uses: mozilla-actions/sccache-action@v0.0.7
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
@@ -57,12 +48,8 @@ jobs:
       run: |
         openSpaceHome="$HOME/source/OpenSpace"
         cd "$openSpaceHome/build"
-        # Use the system's libvulkan, not the vendored one, otherwise they might conflict
-        cef_orig_dir=$(find $HOME/source/OpenSpace/build -path */Release/libcef.so | xargs dirname)
-        rm -v $cef_orig_dir/libvulkan.so.1
         make -j $(nproc)
         
-    
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
@@ -70,6 +57,6 @@ jobs:
         name: OpenSpace-MacOS14-M1
         # optional, default is artifact
         # A file, directory or wildcard pattern that describes what to upload
-        path: /home/runner/work/OpenSpace-AppleSilicon/OpenSpace-AppleSilicon/*
+        path: $HOME/source/OpenSpace/*
       
     
