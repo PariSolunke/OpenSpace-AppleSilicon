@@ -1,0 +1,36 @@
+name: check-disk-space
+
+on: workflow_dispatch
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  # This yml is copied from https://github.com/hn-88/OpenSpace-AppImage/blob/main/.github/workflows/appimage-creation.yml
+  # and modified.
+  BUILD_TYPE: Release
+  
+jobs:
+  build:
+    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
+    # You can convert this to a matrix build if you need cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: get openspace code for a particular release
+      # https://docs.openspaceproject.com/releases-v0.20/contribute/development/compiling/macos.html
+      run: |
+        openSpaceHome="$HOME/source/OpenSpace"
+        git clone --recursive https://github.com/PariSolunke/OpenSpace-AppleSilicon.git "$openSpaceHome"
+        cd "$openSpaceHome"
+        patch -u modules/webbrowser/CMakeLists.txt webbrowsermodule.patch
+        mkdir build
+        cd build
+        df -h
+            
+
+        
+ 
+      
+    
