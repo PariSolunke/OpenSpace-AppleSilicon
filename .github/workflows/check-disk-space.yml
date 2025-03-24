@@ -1,4 +1,4 @@
-name: check-disk-space
+name: debug-upload-after-generate
 
 on: workflow_dispatch
 
@@ -27,10 +27,31 @@ jobs:
         patch -u modules/webbrowser/CMakeLists.txt webbrowsermodule.patch
         mkdir build
         cd build
-        df -h
             
+    - name: Install dependencies
+      # https://docs.openspaceproject.com/releases-v0.20/contribute/development/compiling/ubuntu.html
+      run: |
+        brew install cmake glew boost freeimage mpv vulkan-headers vulkan-loader brotli gdal qt@6
 
+    - name: Configure CMake
+      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+      run: |
+        openSpaceHome="$HOME/source/OpenSpace"
+        cd "$openSpaceHome/build"
+        # https://stackoverflow.com/questions/16700415/cmake-generate-xcode-project-from-existing-sources
+        # CMAKE_PREFIX_PATH to /opt/homebrew - https://stackoverflow.com/questions/68105648/configure-cmake-to-work-with-homebrew-libraries-instead-system-provided-librarie
+        cmake -G Xcode -DCMAKE_BUILD_TYPE="Release" -DCMAKE_PREFIX_PATH=/opt/homebrew -DBUILD_TESTS=OFF -DCOMPILE_WARNING_AS_ERROR=OFF -DOPENSPACE_HAVE_TESTS=OFF -DSGCT_BUILD_TESTS=OFF "$openSpaceHome"
+
+    
         
- 
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        # Artifact name
+        name: OpenSpace-MacOS14-M1-Generated
+        # optional, default is artifact
+        # A file, directory or wildcard pattern that describes what to upload
+        path: $HOME/source/OpenSpace/build
       
     
