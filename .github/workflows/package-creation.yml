@@ -48,7 +48,7 @@ jobs:
       run: |
         openSpaceHome="$HOME/source/OpenSpace"
         cd "$openSpaceHome/build"
-        make -j $(nproc)
+        cmake --build .
         
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
