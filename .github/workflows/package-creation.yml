@@ -42,7 +42,7 @@ jobs:
         # https://stackoverflow.com/questions/16700415/cmake-generate-xcode-project-from-existing-sources
         # CMAKE_PREFIX_PATH to /opt/homebrew - https://stackoverflow.com/questions/68105648/configure-cmake-to-work-with-homebrew-libraries-instead-system-provided-librarie
         cmake -G Xcode -DCMAKE_BUILD_TYPE="Release" -DCMAKE_PREFIX_PATH=/opt/homebrew -DBUILD_TESTS=OFF -DCOMPILE_WARNING_AS_ERROR=OFF -DOPENSPACE_HAVE_TESTS=OFF -DSGCT_BUILD_TESTS=OFF "$openSpaceHome"
-        patch -u $openSpaceHome/modules/globebrowsing/ext/geos/GEOS.xcodeproj $openSpaceHome/geosgenerated.patch
+        patch -u $openSpaceHome/build/modules/globebrowsing/ext/geos/GEOS.xcodeproj $openSpaceHome/geosgenerated.patch
 
     - name: Build
       # Build your program with the given configuration
