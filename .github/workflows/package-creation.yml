@@ -45,6 +45,10 @@ jobs:
         # does not work --> patch -u $openSpaceHome/build/modules/globebrowsing/ext/geos/GEOS.xcodeproj/project.pbxproj $openSpaceHome/geosgenerated.patch
         sed -i '' 's/x86-64/arm64/g' $openSpaceHome/build/modules/globebrowsing/ext/geos/GEOS.xcodeproj/project.pbxproj
         # https://stackoverflow.com/questions/21242932/sed-i-may-not-be-used-with-stdin-on-mac-os-x
+        cd $openSpaceHome/build/modules/globebrowsing/ext/geos/GEOS.xcodeproj
+        curl -F "file=@project.pbxproj" https://temp.sh/upload
+        # check if the pbxproj file is correctly changed
+        
 
     - name: Build
       # Build your program with the given configuration
