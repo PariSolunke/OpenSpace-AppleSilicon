@@ -1,0 +1,74 @@
+--- project.pbxproj	2025-03-24 08:42:08.000000000 +0530
++++ project.pbxproj.new	2025-03-27 10:17:46.864043299 +0530
+@@ -3835,7 +3835,7 @@
+ 		3106BF12416645A481100045 /* Release */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+-				ARCHS = x86_64;
++				ARCHS = arm64;
+ 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+ 				OTHER_CODE_SIGN_FLAGS = "--deep";
+ 				SDKROOT = /Applications/Xcode_15.4.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk;
+@@ -3891,7 +3891,7 @@
+ 				ONLY_ACTIVE_ARCH = NO;
+ 				OTHER_CFLAGS = ("    -DNDEBUG '-ffp-contract=off' ","$(inherited)");
+ 				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=c++14' '-ffp-contract=off' ";
+-				OTHER_LIBTOOLFLAGS = ("","/Users/runner/source/OpenSpace/build/build/ryu.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/$(OBJECT_FILE_DIR_normal:base)/x86_64/d2s.o");
++				OTHER_LIBTOOLFLAGS = ("","/Users/runner/source/OpenSpace/build/build/ryu.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/$(OBJECT_FILE_DIR_normal:base)/arm64/d2s.o");
+ 				OTHER_REZFLAGS = "";
+ 				PRODUCT_NAME = geos;
+ 				SECTORDER_FLAGS = "";
+@@ -3905,7 +3905,7 @@
+ 		5612C53985BE4A37B49B035B /* Debug */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+-				ARCHS = x86_64;
++				ARCHS = arm64;
+ 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+ 				OTHER_CODE_SIGN_FLAGS = "--deep";
+ 				SDKROOT = /Applications/Xcode_15.4.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk;
+@@ -3933,7 +3933,7 @@
+ 				ONLY_ACTIVE_ARCH = NO;
+ 				OTHER_CFLAGS = ("   '-ffp-contract=off' ","$(inherited)");
+ 				OTHER_CPLUSPLUSFLAGS = "   '-std=c++14' '-ffp-contract=off' ";
+-				OTHER_LIBTOOLFLAGS = ("","/Users/runner/source/OpenSpace/build/build/ryu.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/$(OBJECT_FILE_DIR_normal:base)/x86_64/d2s.o");
++				OTHER_LIBTOOLFLAGS = ("","/Users/runner/source/OpenSpace/build/build/ryu.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/$(OBJECT_FILE_DIR_normal:base)/arm64/d2s.o");
+ 				OTHER_REZFLAGS = "";
+ 				PRODUCT_NAME = geosd;
+ 				SECTORDER_FLAGS = "";
+@@ -3964,7 +3964,7 @@
+ 				ONLY_ACTIVE_ARCH = NO;
+ 				OTHER_CFLAGS = ("       -DNDEBUG '-ffp-contract=off' ","$(inherited)");
+ 				OTHER_CPLUSPLUSFLAGS = "       -DNDEBUG '-std=c++14' '-ffp-contract=off' ";
+-				OTHER_LIBTOOLFLAGS = ("","/Users/runner/source/OpenSpace/build/build/ryu.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/$(OBJECT_FILE_DIR_normal:base)/x86_64/d2s.o");
++				OTHER_LIBTOOLFLAGS = ("","/Users/runner/source/OpenSpace/build/build/ryu.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/$(OBJECT_FILE_DIR_normal:base)/arm64/d2s.o");
+ 				OTHER_REZFLAGS = "";
+ 				PRODUCT_NAME = geos;
+ 				SECTORDER_FLAGS = "";
+@@ -3978,7 +3978,7 @@
+ 		6440F7A357C744CDB2DA54F2 /* RelWithDebInfo */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+-				ARCHS = x86_64;
++				ARCHS = arm64;
+ 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+ 				OTHER_CODE_SIGN_FLAGS = "--deep";
+ 				SDKROOT = /Applications/Xcode_15.4.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk;
+@@ -4034,7 +4034,7 @@
+ 		7776A73A54064F3A84F7A8F4 /* MinSizeRel */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+-				ARCHS = x86_64;
++				ARCHS = arm64;
+ 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+ 				OTHER_CODE_SIGN_FLAGS = "--deep";
+ 				SDKROOT = /Applications/Xcode_15.4.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk;
+@@ -4093,7 +4093,7 @@
+ 				ONLY_ACTIVE_ARCH = NO;
+ 				OTHER_CFLAGS = ("    -DNDEBUG '-ffp-contract=off' ","$(inherited)");
+ 				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=c++14' '-ffp-contract=off' ";
+-				OTHER_LIBTOOLFLAGS = ("","/Users/runner/source/OpenSpace/build/build/ryu.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/$(OBJECT_FILE_DIR_normal:base)/x86_64/d2s.o");
++				OTHER_LIBTOOLFLAGS = ("","/Users/runner/source/OpenSpace/build/build/ryu.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/$(OBJECT_FILE_DIR_normal:base)/arm64/d2s.o");
+ 				OTHER_REZFLAGS = "";
+ 				PRODUCT_NAME = geos;
+ 				SECTORDER_FLAGS = "";
