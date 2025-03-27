@@ -46,11 +46,9 @@ jobs:
         # sed -i '' 's/x86-64/arm64/g' $openSpaceHome/build/modules/globebrowsing/ext/geos/GEOS.xcodeproj/project.pbxproj
         # the sed did not seem to work - checked by uploading to temp.sh 
         # https://stackoverflow.com/questions/21242932/sed-i-may-not-be-used-with-stdin-on-mac-os-x
-        cd $openSpaceHome/build/modules/globebrowsing/ext/geos/GEOS.xcodeproj
-        rm project.pbxproj
-        cp -v $openSpaceHome/project.pbxproj .
-        curl -F "file=@project.pbxproj" https://temp.sh/upload
-        # check if the pbxproj file is correctly changed
+        cd /Users/runner/source/OpenSpace/build/build/ryu.build/Release/Objects-normal
+        cp -R arm64 x86_64
+        # try copying the entire directory to see if file not found errors can be avoided
         
 
     - name: Build
