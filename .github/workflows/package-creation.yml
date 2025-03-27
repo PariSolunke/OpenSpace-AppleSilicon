@@ -43,7 +43,8 @@ jobs:
         # CMAKE_PREFIX_PATH to /opt/homebrew - https://stackoverflow.com/questions/68105648/configure-cmake-to-work-with-homebrew-libraries-instead-system-provided-librarie
         cmake -G Xcode -DCMAKE_BUILD_TYPE="Release" -DCMAKE_PREFIX_PATH=/opt/homebrew -DBUILD_TESTS=OFF -DCOMPILE_WARNING_AS_ERROR=OFF -DOPENSPACE_HAVE_TESTS=OFF -DSGCT_BUILD_TESTS=OFF "$openSpaceHome"
         # does not work --> patch -u $openSpaceHome/build/modules/globebrowsing/ext/geos/GEOS.xcodeproj/project.pbxproj $openSpaceHome/geosgenerated.patch
-        sed -i 's/x86-64/arm64/g' $openSpaceHome/build/modules/globebrowsing/ext/geos/GEOS.xcodeproj/project.pbxproj
+        sed -i '' 's/x86-64/arm64/g' $openSpaceHome/build/modules/globebrowsing/ext/geos/GEOS.xcodeproj/project.pbxproj
+        # https://stackoverflow.com/questions/21242932/sed-i-may-not-be-used-with-stdin-on-mac-os-x
 
     - name: Build
       # Build your program with the given configuration
