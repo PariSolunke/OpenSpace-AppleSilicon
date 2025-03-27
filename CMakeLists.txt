@@ -32,6 +32,8 @@ set(OPENSPACE_VERSION_MINOR 19)
 set(OPENSPACE_VERSION_PATCH 0)
 set(OPENSPACE_VERSION_STRING "<dev>")
 
+add_definitions(-w)
+
 include(${PROJECT_SOURCE_DIR}/support/cmake/module_common.cmake)
 include(${PROJECT_SOURCE_DIR}/ext/ghoul/support/cmake/message_macros.cmake)
 
