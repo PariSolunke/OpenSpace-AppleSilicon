@@ -31,7 +31,7 @@ jobs:
     - name: Install dependencies
       # https://docs.openspaceproject.com/releases-v0.20/contribute/development/compiling/ubuntu.html
       run: |
-        brew install cmake sed glew boost freeimage mpv vulkan-headers vulkan-loader brotli gdal qt@6
+        brew install cmake glew boost freeimage mpv vulkan-headers vulkan-loader brotli gdal qt@6
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
