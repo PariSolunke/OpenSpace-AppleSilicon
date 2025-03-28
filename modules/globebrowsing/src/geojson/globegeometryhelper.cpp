@@ -237,7 +237,7 @@ subdivideTriangle(const glm::vec3& v0, const glm::vec3& v1, const glm::vec3& v2,
     vertices.reserve(maxSteps * maxSteps);
 
     // Add points inside the triangle
-    std::vector<Coordinate> pointCoords;
+    std::vector<geos::geom::Coordinate> pointCoords;
     pointCoords.reserve(3 * maxSteps + 1);
 
     const float lengthEdge01 = glm::length(v1 - v0);
