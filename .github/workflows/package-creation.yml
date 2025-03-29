@@ -38,6 +38,11 @@ jobs:
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: |
         openSpaceHome="$HOME/source/OpenSpace"
+        # as suggested by copilot, adding this to force arm64 architecture in all submodules - 
+        # without this, x86-64 obj files were being built, leading to linker errors etc. 
+        # Discussed in https://github.com/PariSolunke/OpenSpace-AppleSilicon/issues/7
+        cd "$openSpaceHome"
+        find . -name "CMakeLists.txt" -exec sed -i '' '1s/^/set(CMAKE_OSX_ARCHITECTURES "arm64")\n/' {} +
         cd "$openSpaceHome/build"
         # https://stackoverflow.com/questions/16700415/cmake-generate-xcode-project-from-existing-sources
         # CMAKE_PREFIX_PATH to /opt/homebrew - https://stackoverflow.com/questions/68105648/configure-cmake-to-work-with-homebrew-libraries-instead-system-provided-librarie
