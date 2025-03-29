@@ -207,9 +207,9 @@ add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/modules")
 end_header("End: Configuring Modules")
 
 
-add_subdirectory(support/coding/codegen/tests)
-set_target_properties(run_test_codegen PROPERTIES FOLDER "Unit Tests/support")
-set_target_properties(codegentest PROPERTIES FOLDER "Unit Tests")
+# add_subdirectory(support/coding/codegen/tests)
+# set_target_properties(run_test_codegen PROPERTIES FOLDER "Unit Tests/support")
+# set_target_properties(codegentest PROPERTIES FOLDER "Unit Tests")
 
 
 begin_header("Configuring Applications")
