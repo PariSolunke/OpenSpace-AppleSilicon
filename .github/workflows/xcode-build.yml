@@ -1,0 +1,72 @@
+name: xcode-build
+
+on: workflow_dispatch
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  # This yml is copied from https://github.com/hn-88/OpenSpace-AppImage/blob/main/.github/workflows/appimage-creation.yml
+  # and modified.
+  BUILD_TYPE: Release
+  
+jobs:
+  build:
+    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
+    # You can convert this to a matrix build if you need cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: get openspace code for a particular release
+      # https://docs.openspaceproject.com/releases-v0.20/contribute/development/compiling/macos.html
+      run: |
+        openSpaceHome="$HOME/source/OpenSpace"
+        git clone --recursive https://github.com/PariSolunke/OpenSpace-AppleSilicon.git "$openSpaceHome"
+        cd "$openSpaceHome"
+        patch -u modules/webbrowser/CMakeLists.txt webbrowsermodule.patch
+        mkdir build
+        cd build
+            
+    - name: Install dependencies
+      # https://docs.openspaceproject.com/releases-v0.20/contribute/development/compiling/ubuntu.html
+      run: |
+        brew install cmake glew boost freeimage mpv vulkan-headers vulkan-loader brotli gdal qt@6
+
+    - name: Configure CMake
+      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+      run: |
+        openSpaceHome="$HOME/source/OpenSpace"
+        # as suggested by copilot, adding this to force arm64 architecture in all submodules - 
+        # without this, x86-64 obj files were being built, leading to linker errors etc. 
+        # Discussed in https://github.com/PariSolunke/OpenSpace-AppleSilicon/issues/7
+        cd "$openSpaceHome"
+        find . -name "CMakeLists.txt" -exec sed -i '' '1s/^/set(CMAKE_OSX_ARCHITECTURES "arm64")\n/' {} +
+        cd "$openSpaceHome/build"
+        # https://stackoverflow.com/questions/16700415/cmake-generate-xcode-project-from-existing-sources
+        # CMAKE_PREFIX_PATH to /opt/homebrew - https://stackoverflow.com/questions/68105648/configure-cmake-to-work-with-homebrew-libraries-instead-system-provided-librarie
+        cmake -G Xcode -DCMAKE_OSX_ARCHITECTURES="$(ARCHS_STANDARD)" -DONLY_ACTIVE_ARCH=YES -DCMAKE_CXX_FLAGS=-Wno-error -DCMAKE_C_FLAGS=-Wno-error -DCMAKE_BUILD_TYPE="Release" -DCMAKE_PREFIX_PATH=/opt/homebrew -DBUILD_TESTS=OFF -DCOMPILE_WARNING_AS_ERROR=OFF -DOPENSPACE_HAVE_TESTS=OFF -DSGCT_BUILD_TESTS=OFF "$openSpaceHome" 
+        # does not work --> patch -u $openSpaceHome/build/modules/globebrowsing/ext/geos/GEOS.xcodeproj/project.pbxproj $openSpaceHome/geosgenerated.patch
+        # sed -i '' 's/x86-64/arm64/g' $openSpaceHome/build/modules/globebrowsing/ext/geos/GEOS.xcodeproj/project.pbxproj
+        # the sed did not seem to work - checked by uploading to temp.sh 
+        # https://stackoverflow.com/questions/21242932/sed-i-may-not-be-used-with-stdin-on-mac-os-x
+        
+
+    - name: Build
+      # Build your program with the given configuration
+      run: |
+        openSpaceHome="$HOME/source/OpenSpace"
+        cd "$openSpaceHome/build"
+        cmake --build . --config ${{env.BUILD_TYPE}} -- -DCMAKE_OSX_ARCHITECTURES=arm64
+        
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        # Artifact name
+        name: OpenSpace-MacOS14-M1
+        # optional, default is artifact
+        # A file, directory or wildcard pattern that describes what to upload
+        path: $HOME/source/OpenSpace/*
+      
+    
