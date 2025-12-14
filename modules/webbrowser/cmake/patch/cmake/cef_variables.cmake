@@ -27,7 +27,7 @@ if(NOT DEFINED PROJECT_ARCH)
   if(CMAKE_SIZEOF_VOID_P MATCHES 8)
     set(PROJECT_ARCH "x86_64")
   else()
-    set(PROJECT_ARCH "x86")
+    set(PROJECT_ARCH "arm64")
   endif()
 
   if(OS_MACOSX)
@@ -318,7 +318,7 @@ if(OS_MACOSX)
   if(PROJECT_ARCH STREQUAL "x86_64")
     set(CMAKE_OSX_ARCHITECTURES "x86_64")
   else()
-    set(CMAKE_OSX_ARCHITECTURES "i386")
+    set(CMAKE_OSX_ARCHITECTURES "arm64")
   endif()
 
   # CEF directory paths.
